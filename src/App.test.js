@@ -1,6 +1,6 @@
 import { checkEnteredStringHasValidCurlyBrackets } from "./util";
 
-describe("Check characters in the entered string is have matching words or not", () => {
+describe("Check characters in the entered string is have matching curly brackets or not", () => {
   test("{} - True", () => {
     const result = checkEnteredStringHasValidCurlyBrackets("{}");
 

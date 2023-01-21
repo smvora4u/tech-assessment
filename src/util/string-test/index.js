@@ -1,4 +1,5 @@
-export const checkEnteredStringHasMatchedCurlyBrackets = (str) => {
+export default class StringTest {
+  static hasMatchedCurlyBrackets = ({str}) => {
     const enteredString = str.trim();
     let bracketsInString = [];
     
@@ -18,4 +19,5 @@ export const checkEnteredStringHasMatchedCurlyBrackets = (str) => {
     } else {
       return false;
     }
-  };
+  }
+}

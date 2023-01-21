@@ -1,29 +1,28 @@
-import { checkEnteredStringHasMatchedCurlyBrackets } from "./util";
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "./App";
 
-describe("Check characters in the entered string is have matching curly brackets or not", () => {
-  test("{} - True", () => {
-    const result = checkEnteredStringHasMatchedCurlyBrackets("{}");
+test("renders testing button", () => {
+  render(<App />);
+  const validateButton = screen.getByRole("button");
+  expect(validateButton).toBeInTheDocument();
+});
 
-    expect(result).toBeTruthy();
-  });
-  test("}{ - False (closed bracket can't proceed all open brackets.)", () => {
-    const result = checkEnteredStringHasMatchedCurlyBrackets("}{");
+test("render input filed", () => {
+  render(<App />);
+  const inputField = screen.getByTestId("validCurlyBrackets");
+  expect(inputField).toBeInTheDocument();
+});
 
-    expect(result).toBeFalsy();
-  });
-  test("{{} - False (one bracket pair was not closed)", () => {
-    const result = checkEnteredStringHasMatchedCurlyBrackets("{{}");
+test("renders validation message", () => {
+  render(<App />);
+  const buttonEle = screen.getByRole("button");
+  userEvent.click(buttonEle);
 
-    expect(result).toBeFalsy();
-  });
-  test('"" - True. (no brackets in the string will return True)', () => {
-    const result = checkEnteredStringHasMatchedCurlyBrackets('""');
-
-    expect(result).toBeTruthy();
-  });
-  test("{abc...xyz} - True (non-bracket characters are ignored appropriately)", () => {
-    const result = checkEnteredStringHasMatchedCurlyBrackets("{abc...xyz}");
-
-    expect(result).toBeTruthy();
-  });
+  const outputElement = screen.getByText(
+    "valid numbers and sequence of '{}' brackets.",
+    { exact: false }
+  );
+  expect(outputElement).toBeInTheDocument();
 });

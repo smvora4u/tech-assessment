@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-import { checkEnteredStringHasMatchedCurlyBrackets } from "./util";
+import StringTest from "./util/string-test";
 
 const validStringMsg = "has valid numbers and sequence of '{}' brackets.";
 const inValidStringMsg = "has not valid numbers and sequence of '{}' brackets.";
@@ -20,7 +20,7 @@ function App() {
       setIsValid(false);
     }
 
-    if (checkEnteredStringHasMatchedCurlyBrackets(testString)) {
+    if (StringTest.hasMatchedCurlyBrackets({str: testString})) {
       setValidationMsg(enteredString + " - " + validStringMsg);
       setIsValid(true);
     } else {
@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <div>
-        <label for="validCurlyBrackets">
+        <label htmlFor="validCurlyBrackets">
           Please enter string to test whether it has valid numbers and sequence
           of curly brackets.
         </label>
@@ -41,6 +41,7 @@ function App() {
       <input
         type="text"
         id="validCurlyBrackets"
+        data-testid="validCurlyBrackets"
         value={testString}
         className={isValid === undefined ? "" : isValid ? "valid" : "invalid"}
         onChange={(e) => setTestString(e.target.value)}
